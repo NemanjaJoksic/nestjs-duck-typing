@@ -1,5 +1,5 @@
 import { IsNotEmpty, MinLength, Validate } from 'class-validator'
-import { UserNotExistRule } from './app.validation'
+import { UserNotExistRule } from './validator/validation'
 
 export class UserEntity {
   id: number

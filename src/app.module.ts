@@ -1,12 +1,10 @@
 import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppRepository, AppService } from './app.service'
-import { AppValidator, UserNotExistRule } from './app.validation'
+import { DatabaseModule } from './database/module'
+import { ValidatorModule } from './validator/module'
+import { ServiceModule } from './service/module'
+import { ControllerModule } from './controller/module'
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [UserNotExistRule, AppService, AppRepository, AppValidator],
-  exports: [AppRepository]
+  imports: [DatabaseModule, ValidatorModule, ServiceModule, ControllerModule],
 })
 export class AppModule {}

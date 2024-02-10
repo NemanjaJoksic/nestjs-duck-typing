@@ -5,23 +5,17 @@ import {
   ValidationArguments,
   validate,
 } from 'class-validator'
-import { AppRepository } from './app.service'
-import { ModuleRef } from '@nestjs/core'
+import { AppRepository } from 'src/database/repository'
 
 @Injectable()
 @ValidatorConstraint({ name: 'UserNotExist', async: true })
 export class UserNotExistRule implements ValidatorConstraintInterface {
   constructor(private readonly appRepository: AppRepository) {}
-  // constructor(private moduleRef: ModuleRef) {
-  //   console.log('+++++')
-  // }
 
   async validate(username: string): Promise<boolean> {
-    // const ar = this.moduleRef.get(AppRepository)
-    const ar = this.appRepository
-    console.log('appRepository=' + ar)
+    console.log('appRepository=' + this.appRepository)
 
-    const exists = await ar.exists(username)
+    const exists = await this.appRepository.exists(username)
     return !exists
   }
 

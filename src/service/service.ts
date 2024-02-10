@@ -1,22 +1,7 @@
 import { Injectable } from '@nestjs/common'
-import { CreateUserDto, User, UserEntity } from './app.model'
-import { AppValidator } from './app.validation'
-
-@Injectable()
-export class AppRepository {
-  async getUsers(): Promise<UserEntity[]> {
-    const userEntity = new UserEntity()
-    userEntity.id = 1
-    userEntity.username = 'test_user'
-    userEntity.password = 'test'
-
-    return [userEntity]
-  }
-
-  async exists(username: string): Promise<boolean> {
-    return true
-  }
-}
+import { User, CreateUserDto } from 'src/app.model'
+import { AppRepository } from 'src/database/repository'
+import { AppValidator } from 'src/validator/validation'
 
 @Injectable()
 export class AppService {
