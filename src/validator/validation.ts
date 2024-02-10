@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
@@ -9,7 +9,7 @@ import { AppRepository } from 'src/database/repository'
 
 @Injectable()
 @ValidatorConstraint({ name: 'UserNotExist', async: true })
-export class UserNotExistRule implements ValidatorConstraintInterface {
+export class UserNotExist implements ValidatorConstraintInterface {
   constructor(private readonly appRepository: AppRepository) {}
 
   async validate(username: string): Promise<boolean> {
@@ -20,7 +20,7 @@ export class UserNotExistRule implements ValidatorConstraintInterface {
   }
 
   defaultMessage(args: ValidationArguments) {
-    return 'User already exists'
+    return 'user already exists'
   }
 }
 
@@ -29,6 +29,23 @@ export class AppValidator {
     const errors = await validate(object)
     if (errors.length > 0) {
       console.log(errors)
+
+      const messages = []
+      errors.forEach((error) => {
+        Object.entries(error.constraints).forEach(([, message]) => {
+          messages.push(message)
+        })
+      })
+
+      console.log(messages)
+      throw new HttpException(
+        {
+          message: 'Invalid request',
+          status: HttpStatus.BAD_REQUEST,
+          errors: messages,
+        },
+        HttpStatus.BAD_REQUEST,
+      )
     }
   }
 }

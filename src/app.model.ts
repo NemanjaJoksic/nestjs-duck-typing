@@ -1,5 +1,5 @@
 import { IsNotEmpty, MinLength, Validate } from 'class-validator'
-import { UserNotExistRule } from './validator/validation'
+import { UserNotExist } from './validator/validation'
 
 export class UserEntity {
   id: number
@@ -14,7 +14,7 @@ export class User {
 
 export class CreateUserDto {
   @IsNotEmpty()
-  @Validate(UserNotExistRule)
+  @Validate(UserNotExist)
   username: string
 
   @IsNotEmpty()
