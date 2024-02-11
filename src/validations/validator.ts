@@ -14,7 +14,6 @@ export class AppValidator {
           })
         })
   
-        console.log(messages)
         throw new HttpException(
           {
             message: 'Invalid request',
