@@ -1,12 +1,6 @@
 import { IsNotEmpty, MinLength, Validate } from 'class-validator'
 import { UserNotExist } from 'src/validations/user.validation'
 
-export class UserEntity {
-  id: number
-  username: string
-  password: string
-}
-
 export class User {
   id: number
   username: string
