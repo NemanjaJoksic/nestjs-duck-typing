@@ -1,14 +1,14 @@
 import { Body, Controller, Get, Post } from '@nestjs/common'
-import { User, CreateUserDto } from 'src/app.model'
-import { AppService } from 'src/service/service'
+import { User, CreateUserDto } from 'src/model/user.model';
+import { UserService } from 'src/services/user.service';
 
 @Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+export class UserController {
+  constructor(private readonly userService: UserService) {}
 
   @Get('/api/users')
   getUsers(): Promise<User[]> {
-    return this.appService.getUsers()
+    return this.userService.getUsers()
   }
 
   @Post('/api/users')
@@ -19,6 +19,6 @@ export class AppController {
     createUserDto.username = body.username
     createUserDto.password = body.password
 
-    return this.appService.createUser(createUserDto)
+    return this.userService.createUser(createUserDto)
   }
 }

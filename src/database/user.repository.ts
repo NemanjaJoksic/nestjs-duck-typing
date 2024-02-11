@@ -7,7 +7,7 @@ export class UserEntity {
 }
 
 @Injectable()
-export class AppRepository {
+export class UserRepository {
   async getUsers(): Promise<UserEntity[]> {
     const userEntity = new UserEntity()
     userEntity.id = 1

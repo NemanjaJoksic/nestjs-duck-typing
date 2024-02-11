@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common'
-import { User, CreateUserDto } from 'src/app.model'
-import { AppRepository } from 'src/database/repository'
-import { AppValidator } from 'src/validator/validation'
+import { UserRepository } from 'src/database/user.repository'
+import { User, CreateUserDto } from 'src/model/user.model'
+import { AppValidator } from 'src/validations/validator'
 
 @Injectable()
-export class AppService {
+export class UserService {
   constructor(
     private readonly validator: AppValidator,
-    private readonly appRepository: AppRepository,
+    private readonly userRepository: UserRepository,
   ) {}
 
   async getUsers(): Promise<User[]> {
-    return this.appRepository.getUsers()
+    return this.userRepository.getUsers()
   }
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {

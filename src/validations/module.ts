@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common'
 import { DatabaseModule } from 'src/database/module'
-import { AppValidator, UserNotExist } from './validation'
+import { UserNotExist } from './user.validation'
+import { AppValidator } from './validator'
 
 @Module({
   imports: [DatabaseModule],
