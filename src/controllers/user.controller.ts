@@ -7,18 +7,20 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('/api/users')
-  getUsers(): Promise<User[]> {
+  async getUsers(): Promise<User[]> {
     return this.userService.getUsers()
   }
 
   @Post('/api/users')
-  createUser(
+  async createUser(
     @Body() body: { username: string; password: string },
   ): Promise<User> {
     const createUserDto = new CreateUserDto()
     createUserDto.username = body.username
     createUserDto.password = body.password
 
-    return this.userService.createUser(createUserDto)
+    const user = await this.userService.createUser(createUserDto)
+
+    return user as unknown as User
   }
 }

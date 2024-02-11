@@ -11,7 +11,11 @@ export class UserService {
   ) {}
 
   async getUsers(): Promise<User[]> {
-    return this.userRepository.getUsers()
+    const userEntities = await this.userRepository.getUsers()
+
+    return userEntities.map((userEntity) => {
+      return { id: userEntity.id, username: userEntity.username }
+    })
   }
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
